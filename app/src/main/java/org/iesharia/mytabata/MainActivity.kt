@@ -11,6 +11,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.iesharia.mytabata.ui.theme.MytabataTheme
@@ -33,9 +36,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
+    val theCounter by remember { mutableStateOf("00") }
     Column {
         Text(
-            text = "00:00",
+            text = theCounter,
             modifier = modifier
         )
         Button(onClick = {}) {
