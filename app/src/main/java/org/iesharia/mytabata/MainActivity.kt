@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -38,8 +39,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Counter(modifier: Modifier = Modifier) {
     var theCounter by remember { mutableLongStateOf(0L) }
-    val miConterDown = CounterDown(99) { newvalue -> theCounter = newvalue }
-
+    var miConterDown by remember{ mutableStateOf(CounterDown(99) { newvalue ->
+        theCounter = newvalue
+    })}
 
     Column {
         Text(
@@ -47,12 +49,7 @@ fun Counter(modifier: Modifier = Modifier) {
             modifier = modifier
         )
         Button(onClick = {
-            if (!miConterDown.counterState) {
-                miConterDown.myCounter.start()
-                miConterDown.counterState = true
-            } else {
-                miConterDown.myCounter.cancel()
-            }
+            miConterDown.toggle()
         }) {
             Text(
                 text = "Pulsar"
